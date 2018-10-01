@@ -12,12 +12,12 @@
 </body>
 </html>
 <?php
-//untuk yg komentar kalian bebas mau menggunakan 2 file atau satu file php
-  if (isset($_POST['nama'])) {
+    if (isset($_POST['nama'])) {
         $nama = $_POST['nama'];
         $komentar = $_POST['komentar'];
 
-        $count = strlen($komentar);
+        $data = explode(" ", $komentar);
+        $count = count($data);
         if ($count < 5) {
             ?>
             <script>
