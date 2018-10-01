@@ -1,5 +1,13 @@
 <?php
-  if (isset($_POST['submit'])) {
+    session_start();
+    @$data = $_SESSION['data'];
+
+    if(isset($_GET['destroy'])){
+        session_destroy();
+        header("Location: registrasi.php");
+    }
+
+    if (isset($_POST['submit'])) {
         $nim = $_POST['nim'];
         $nama = $_POST['nama'];
         $email = $_POST['email'];
@@ -22,12 +30,46 @@
             </script>
             <?php
         } else {
+            $baris = count($_SESSION['data']);
+            $newArray = array(
+                "NIM"   => $nim,
+                "Nama"  => $nama,
+                "Email" => $email
+            );
+            $_SESSION['data'][$baris] = $newArray;
             ?>
             <script>
-                alert("NIM : <?php echo $nim;?> \nNama : <?php echo $nama;?> \nEmail : <?php echo $email;?>");
-                location = "registrasi.php";
+                alert("Data berhasil tersimpan..");
+                location = "prosesregis.php";
             </script>
             <?php
         }
     }
 ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body>
+        <a href="registrasi.php">Kembali</a>
+        <table width="50%" border="1" align="center" style="text-align: center;">
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Email</th>
+            </tr>
+            <?php
+                for ($i = 0; $i < count($data) ; $i++) { 
+                    ?>
+                    <tr>
+                        <td><?php echo $data[$i]['NIM'];?></td>
+                        <td><?php echo $data[$i]['Nama'];?></td>
+                        <td><?php echo $data[$i]['Email'];?></td>
+                    </tr>
+                    <?php
+                }
+            ?>
+        </table>
+    </body>
+</html>
