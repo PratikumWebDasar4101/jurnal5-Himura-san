@@ -25,7 +25,7 @@
             </script>
             <?php
         } else {
-            echo "Jumlah Kalimat Komentar : ".$count;
+            echo "Jumlah Kata Komentar : ".$count;
         }
     }
 ?>
